@@ -1,0 +1,13 @@
+{
+  "name": "egghead-dl",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tool to create a script to download free egghead videos",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Viktors Jenovs",
+  "license": "MIT"
+}
