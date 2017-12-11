@@ -1,6 +1,9 @@
 A simple scraper to create a script for downloading free videos from egghead.  
 Has no external dependencies (i.e. no need to `npm install` anything).
 
+Script requires `ffmpeg` to download the videos.  
+[Download ffmpeg](https://www.ffmpeg.org/download.html)
+
 ## Usage
 
 Clone the repo.
@@ -14,7 +17,7 @@ The file `script.sh` will be created.
 Copy the `script.sh` to a desired location.
 
 Make it executable with:  
-`$ sudo chmod a+x ./script.sh`
+`$ chmod a+x ./script.sh`
 
 Run the script to start download:  
 `$ ./script.sh`
