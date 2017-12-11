@@ -38,6 +38,10 @@ try {
 }
 
 function createScript(data) {
+  if (!data.course) {
+    return console.log(`No free lessons found :(`);
+  }
+
   const d = data.course.course;
   const title = d.title;
   const description = d.description.replace(/`/g, '');
@@ -51,7 +55,12 @@ function createScript(data) {
   const command = `#!/bin/sh\nFOLDER="${title} by ${instructor}"\nmkdir "$FOLDER"\necho ${readme} >> "$FOLDER/README"`;
   result.push(command);
 
+  let lessonCount = 0;
+
   for (let i in lessons) {
+    if (!lessons[i].media_urls) {
+      continue;
+    }
     const title = lessons[i].title;
     const url = lessons[i].media_urls.hls_url;
 
@@ -59,8 +68,17 @@ function createScript(data) {
       `ffmpeg -i ${url} -c copy "$FOLDER/${+i + 1 < 10 ? 0 : ''}${+i +
         1} - ${title}.mkv"`
     );
+    lessonCount++;
+  }
+
+  if (!lessonCount) {
+    return console.log(`No free lessons found :(`);
   }
 
   fs.writeFileSync('script.sh', result.join('\n'));
-  console.log('Script successfully created!');
+  console.log(
+    `Script successfully created (${lessonCount} lesson${
+      lessonCount == 1 ? '' : 's'
+    })!`
+  );
 }
