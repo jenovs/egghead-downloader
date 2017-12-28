@@ -7,37 +7,42 @@ if (!url.length) {
   return console.log('No url in input.txt');
 }
 
-// remove the line break character if present
-if (url.indexOf('\n')) {
-  url = url.substring(0, url.length - 1);
+const urls = url.split('\n');
+
+urls.forEach((url, i) => {
+  if (url.length != 0) {
+    getLesson(url, i);
+  }
+});
+
+function getLesson(url, i) {
+  try {
+    https.get(url, res => {
+      let text = '';
+
+      res.on('data', c => {
+        text += c;
+      });
+
+      res.on('end', () => {
+        const ind = text.indexOf('data-component-name="App"');
+        const start = text.indexOf('>', ind) + 1;
+        const end = text.indexOf('</', start);
+        let data;
+        try {
+          data = JSON.parse(text.substring(start, end));
+        } catch (e) {
+          return console.log('Error: The input address is probably wrong');
+        }
+        createScript(data, i);
+      });
+    });
+  } catch (e) {
+    return console.log('Error:', e.message);
+  }
 }
 
-try {
-  https.get(url, res => {
-    let text = '';
-
-    res.on('data', c => {
-      text += c;
-    });
-
-    res.on('end', () => {
-      const ind = text.indexOf('data-component-name="App"');
-      const start = text.indexOf('>', ind) + 1;
-      const end = text.indexOf('</', start);
-      let data;
-      try {
-        data = JSON.parse(text.substring(start, end));
-      } catch (e) {
-        return console.log('Error: The input address is probably wrong');
-      }
-      createScript(data);
-    });
-  });
-} catch (e) {
-  return console.log('Error:', e.message);
-}
-
-function createScript(data) {
+function createScript(data, i) {
   if (!data.course) {
     return console.log(`No free lessons found :(`);
   }
@@ -75,7 +80,7 @@ function createScript(data) {
     return console.log(`No free lessons found :(`);
   }
 
-  fs.writeFileSync('script.sh', result.join('\n'), { mode: 0777 });
+  fs.writeFileSync(`script${i}.sh`, result.join('\n'), { mode: 0777 });
   console.log(
     `Script successfully created (${lessonCount} lesson${
       lessonCount == 1 ? '' : 's'

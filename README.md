@@ -8,11 +8,11 @@ Script requires `ffmpeg` to download the videos.
 
 Clone the repo.
 
-Paste the course URL into `input.txt`.
+Paste the course URLs into `input.txt` (one url per line).
 
 In terminal navigate to the project folder and run `node index.js`.
 
-The file `script.sh` will be created.
+The file `scriptN.sh` will be created, where `N` is 0, 1, 2 etc.
 
 Copy the `script.sh` to a desired location.
 
