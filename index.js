@@ -75,7 +75,7 @@ function createScript(data) {
     return console.log(`No free lessons found :(`);
   }
 
-  fs.writeFileSync('script.sh', result.join('\n'));
+  fs.writeFileSync('script.sh', result.join('\n'), { mode: 0777 });
   console.log(
     `Script successfully created (${lessonCount} lesson${
       lessonCount == 1 ? '' : 's'

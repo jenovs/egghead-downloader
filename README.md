@@ -16,9 +16,6 @@ The file `script.sh` will be created.
 
 Copy the `script.sh` to a desired location.
 
-Make it executable with:  
-`$ chmod a+x ./script.sh`
-
 Run the script to start download:  
 `$ ./script.sh`
 
