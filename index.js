@@ -48,7 +48,7 @@ function createScript(data, i) {
   }
 
   const d = data.course.course;
-  const title = d.title;
+  const title = cleanPathname(d.title);
   const description = d.description.replace(/`/g, '');
   const instructor = d.instructor.full_name;
   const lessons = d.lessons;
@@ -66,7 +66,7 @@ function createScript(data, i) {
     if (!lessons[i].media_urls) {
       continue;
     }
-    const title = lessons[i].title;
+    const title = cleanPathname(lessons[i].title);
     const url = lessons[i].media_urls.hls_url;
 
     result.push(
@@ -86,4 +86,8 @@ function createScript(data, i) {
       lessonCount == 1 ? '' : 's'
     })!`
   );
+}
+
+function cleanPathname(str) {
+  return str.replace(/[\/\\]/g, '-');
 }
