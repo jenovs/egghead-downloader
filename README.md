@@ -10,6 +10,12 @@ Clone the repo.
 
 Paste the course URLs into `input.txt` (one url per line).
 
+> If you only have one url you can provide it as a command line argument:
+>
+> ```
+> $ node index.js https://egghead.io/lesson/url
+> ```
+
 In terminal navigate to the project folder and run `node index.js`.
 
 The file `scriptN.sh` will be created, where `N` is 0, 1, 2 etc.
