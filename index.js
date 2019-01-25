@@ -8,11 +8,11 @@ let urls = [url];
 
 // if no url provided as an argument
 if (!url) {
-let url = fs.readFileSync('./input.txt', 'utf8');
+  let url = fs.readFileSync('./input.txt', 'utf8');
 
-if (!url.length) {
-  return console.log('No url in input.txt');
-}
+  if (!url.length) {
+    return console.log('No url in input.txt');
+  }
 
   urls = url.split('\n');
 }
