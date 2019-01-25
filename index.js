@@ -91,5 +91,5 @@ function createScript(data, i) {
 }
 
 function cleanPathname(str) {
-  return str.replace(/[\/\\]/g, '-');
+  return str.replace(/[<>]/g, '').replace(/[\/\\]/g, '-');
 }
