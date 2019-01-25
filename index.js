@@ -3,13 +3,19 @@
 const fs = require('fs');
 const https = require('https');
 
+let url = process.argv[2];
+let urls = [url];
+
+// if no url provided as an argument
+if (!url) {
 let url = fs.readFileSync('./input.txt', 'utf8');
 
 if (!url.length) {
   return console.log('No url in input.txt');
 }
 
-const urls = url.split('\n');
+  urls = url.split('\n');
+}
 
 urls.forEach((url, i) => {
   if (url.length != 0) {
